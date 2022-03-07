@@ -1,1 +1,1 @@
-# calculator
+This is the final project in Foundations. It will test everything that I have learned thus far. The objective is to make a working calculator that functions in the browser.
