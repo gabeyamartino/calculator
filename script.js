@@ -34,13 +34,14 @@ operate(7, '/', 2)
 
 const numButtons = document.querySelectorAll('button');
 const screen = document.getElementById('calculator-screen');
+screen.textContent = 'button.value';
 const container = document.querySelector(".container");
 
 console.log(numButtons)
 console.log(screen)
 numButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        screen.textContent = 'button.value';
+        screen.value = button.value;
         console.log(button.value)
     });
 });
