@@ -2,6 +2,7 @@ const numButtons = document.querySelectorAll('button.number');
 const screen = document.getElementById('calculator-screen');
 const operators = document.querySelectorAll('button.operator');
 const equalSign = document.querySelectorAll('button.equal-sign');
+const clear = document.querySelectorAll('button.all-clear');
 let displayValue = [];
 const firstOperand = [];
 const operatorStorage = [0];
@@ -52,6 +53,7 @@ operators.forEach((button) => {
         operatorStorage[0] = button.value;
         firstOperand[0] = screen.value;
         displayValue = [];
+
     });
 });
 
@@ -62,13 +64,22 @@ equalSign.forEach((button) => {
     });
 });
 
+clear.forEach((button) =>{
+    button.addEventListener ('click', () => {
+        firstOperand[0] = '';
+        operatorStorage[0] = '';
+        secondOperand[0] = '';
+        displayValue = [];
+        screen.value = 0;
+    });
+});
+
 // now, figure out how to perform multiple operations without pressing =
 // each time an operator is clicked, the result should display, and become the
 // firstOperand
 
 
-
-
+console.log(displayValue);
 console.log(firstOperand)
 console.log(operatorStorage)
 console.log(secondOperand)
