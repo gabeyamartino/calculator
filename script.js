@@ -3,7 +3,7 @@ const screen = document.getElementById('calculator-screen');
 const operators = document.querySelectorAll('button.operator');
 const equalSign = document.querySelectorAll('button.equal-sign');
 const clear = document.querySelectorAll('button.all-clear');
-const decimal = document.querySelectorAll('button.decimal')
+const decimal = document.querySelectorAll('button.decimal');
 let displayValue = [];
 const firstOperand = [];
 let operatorStorage = [];
@@ -12,22 +12,22 @@ const operationResult = [];
 
 
 function add(a, b) {
-    screen.value = (a + b);
+    screen.value = parseFloat((a + b).toFixed(4));
     return a + b;
 };
 
 function subtract(a, b) {
-    screen.value = (a - b);
+    screen.value = parseFloat((a - b).toFixed(4));
     return a - b;
 };
 
 function multiply(a, b) {
-    screen.value = (a * b);
+    screen.value = parseFloat((a * b).toFixed(4));
     return a * b;
 };
 
 function divide(a, b) {
-    screen.value = (a / b);
+    screen.value = parseFloat((a / b).toFixed(4));
     return a / b;
 };
 
@@ -43,12 +43,25 @@ function operate(a, operator, b) {
     }
 };
 
+function enableButton() {
+    decimal.forEach((button) =>{
+      button.disabled = false;
+
+    })
+}
+
 numButtons.forEach((button) => {
     button.addEventListener('click', () => {
         displayValue.push(button.value);
-        screen.value = parseInt(displayValue.join(''));
+        screen.value = displayValue.join('');
     });
 });
+
+// Upon clicking the operator button the first time, it stores 
+// the first operand, and the chosen operator.
+// Clicking an operator the second time then stores the second operand,
+// runs operate() on first, operator, and second, and assigns that result
+// to first. It stores the chosen operator, and allows for another second.
 
 operators.forEach((button) => {
     button.addEventListener('click', () => {
@@ -61,6 +74,7 @@ operators.forEach((button) => {
         operatorStorage[0] = button.value;
     }
         displayValue = [];
+        enableButton();
     });
 });
 
@@ -69,6 +83,7 @@ equalSign.forEach((button) => {
     secondOperand[0] = screen.value;
     firstOperand[0] = (operate(firstOperand, operatorStorage, secondOperand));
     operatorStorage = [];
+    enableButton();
     });
 });
 
@@ -82,17 +97,15 @@ clear.forEach((button) => {
     });
 });
 
+
 decimal.forEach((button) => {
     button.addEventListener ('click', () => {
         displayValue.push(button.value);
-        screen.value = parseInt(displayValue.join(''));
+        screen.value = displayValue.join('');
+        button.disabled = true;
+        enableButton();
     });
 });
-
-// now, figure out how to perform multiple operations without pressing =
-// each time an operator is clicked, the result should display, and become the
-// firstOperand
-
 
 console.log(displayValue);
 console.log(firstOperand)
