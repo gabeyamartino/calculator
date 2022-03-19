@@ -3,10 +3,12 @@ const screen = document.getElementById('calculator-screen');
 const operators = document.querySelectorAll('button.operator');
 const equalSign = document.querySelectorAll('button.equal-sign');
 const clear = document.querySelectorAll('button.all-clear');
+const decimal = document.querySelectorAll('button.decimal')
 let displayValue = [];
 const firstOperand = [];
-const operatorStorage = [0];
+let operatorStorage = [];
 const secondOperand = [];
+const operationResult = [];
 
 
 function add(a, b) {
@@ -50,10 +52,15 @@ numButtons.forEach((button) => {
 
 operators.forEach((button) => {
     button.addEventListener('click', () => {
+      if (operatorStorage.length === 0) {
         operatorStorage[0] = button.value;
         firstOperand[0] = screen.value;
+      } else {
+        secondOperand[0] = screen.value;
+        firstOperand[0] = operate(firstOperand, operatorStorage, secondOperand);
+        operatorStorage[0] = button.value;
+    }
         displayValue = [];
-
     });
 });
 
@@ -61,16 +68,24 @@ equalSign.forEach((button) => {
     button.addEventListener ('click', () => {
     secondOperand[0] = screen.value;
     firstOperand[0] = (operate(firstOperand, operatorStorage, secondOperand));
+    operatorStorage = [];
     });
 });
 
-clear.forEach((button) =>{
+clear.forEach((button) => {
     button.addEventListener ('click', () => {
         firstOperand[0] = '';
-        operatorStorage[0] = '';
+        operatorStorage = [];
         secondOperand[0] = '';
         displayValue = [];
         screen.value = 0;
+    });
+});
+
+decimal.forEach((button) => {
+    button.addEventListener ('click', () => {
+        displayValue.push(button.value);
+        screen.value = parseInt(displayValue.join(''));
     });
 });
 
