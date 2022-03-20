@@ -4,11 +4,11 @@ const operators = document.querySelectorAll('button.operator');
 const equalSign = document.querySelectorAll('button.equal-sign');
 const clear = document.querySelectorAll('button.all-clear');
 const decimal = document.querySelectorAll('button.decimal');
-let displayValue = [];
 const firstOperand = [];
-let operatorStorage = [];
 const secondOperand = [];
 const operationResult = [];
+let operatorStorage = [];
+let displayValue = [];
 
 
 function add(a, b) {
@@ -46,9 +46,8 @@ function operate(a, operator, b) {
 function enableButton() {
     decimal.forEach((button) =>{
       button.disabled = false;
-
-    })
-}
+    });
+};
 
 numButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -72,6 +71,7 @@ operators.forEach((button) => {
         secondOperand[0] = screen.value;
         firstOperand[0] = operate(firstOperand, operatorStorage, secondOperand);
         operatorStorage[0] = button.value;
+        button.disabled = true;
     }
         displayValue = [];
         enableButton();
@@ -102,12 +102,6 @@ decimal.forEach((button) => {
     button.addEventListener ('click', () => {
         displayValue.push(button.value);
         screen.value = displayValue.join('');
-        button.disabled = true;
-        enableButton();
+        button.disabled = true; 
     });
 });
-
-console.log(displayValue);
-console.log(firstOperand)
-console.log(operatorStorage)
-console.log(secondOperand)
