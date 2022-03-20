@@ -67,6 +67,7 @@ operators.forEach((button) => {
       if (operatorStorage.length === 0) {
         operatorStorage[0] = button.value;
         firstOperand[0] = screen.value;
+        button.disabled = true;
       } else {
         secondOperand[0] = screen.value;
         firstOperand[0] = operate(firstOperand, operatorStorage, secondOperand);
