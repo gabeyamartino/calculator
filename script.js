@@ -10,7 +10,7 @@ const operationResult = [];
 let operatorStorage = [];
 let displayValue = [];
 
-
+console.log(operators)
 function add(a, b) {
     screen.value = Number(parseFloat((a + b).toFixed(4)));
     return a + b;
@@ -56,6 +56,7 @@ numButtons.forEach((button) => {
     button.addEventListener('click', () => {
         displayValue.push(button.value);
         screen.value = displayValue.join('');
+        enableButton();
     });
 });
 
@@ -70,15 +71,15 @@ operators.forEach((button) => {
       if (operatorStorage.length === 0) {
         operatorStorage[0] = button.value;
         firstOperand[0] = screen.value;
-        button.disabled = true;
       } else {
         secondOperand[0] = screen.value;
         firstOperand[0] = operate(firstOperand, operatorStorage, secondOperand);
         operatorStorage[0] = button.value;
-        button.disabled = true;
     }
         displayValue = [];
-        enableButton();
+        for (i=0; i<operators.length; i++){
+        operators[i].disabled = true;
+        };
     });
 });
 
