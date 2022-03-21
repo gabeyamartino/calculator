@@ -12,7 +12,7 @@ let displayValue = [];
 
 
 function add(a, b) {
-    screen.value = parseFloat((a + b).toFixed(4));
+    screen.value = Number(parseFloat((a + b).toFixed(4)));
     return a + b;
 };
 
@@ -46,6 +46,9 @@ function operate(a, operator, b) {
 function enableButton() {
     decimal.forEach((button) =>{
       button.disabled = false;
+    });
+    operators.forEach((button) => {
+        button.disabled = false;
     });
 };
 
